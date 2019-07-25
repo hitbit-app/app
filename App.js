@@ -2,7 +2,7 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
-import { Home } from './screens/Home'
+import { Login } from './screens/Login'
 
 const client = new ApolloClient({
   uri: "https://yarc-app.herokuapp.com"
@@ -11,7 +11,7 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <Home />
+      <Login />
     </ApolloProvider>
   );
 }
