@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { AsyncStorage, StyleSheet, View, Text, Button, TextInput } from 'react-native';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -9,17 +9,20 @@ const LOGIN = gql`
   }
 `;
 
-export function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export function Login({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [login, { error, loading }] = useMutation(LOGIN, {
     variables: {
       email,
       password
     },
     onError: () => {},
-    onCompleted: () => console.log('success')
-  })
+    onCompleted: async ({ login: token }) => {
+      await AsyncStorage.setItem('userToken', token)
+      navigation.navigate('Home')
+    }
+  });
 
   return (
     <View style={styles.container}>
