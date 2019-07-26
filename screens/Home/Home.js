@@ -3,19 +3,23 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-const GET_LATEST_POSTS = gql`
+const GET_HOME_DATA = gql`
   query LatestPosts {
     latestPosts {
       id
+    }
+    userInfo {
+      email
+      username
     }
   }
 `;
 
 export function Home() {
-  const { loading, error, data } = useQuery(GET_LATEST_POSTS)
+  const { loading, error, data } = useQuery(GET_HOME_DATA)
   return (
     <View style={styles.container}>
-      {error}
+      {!!error && error.message}
       {loading && <Text>Loading...</Text>}
       {!loading && (
         <>
@@ -23,7 +27,9 @@ export function Home() {
             style={styles.image}
             source={{uri: 'https://images-na.ssl-images-amazon.com/images/I/61hhqctNtJL._SY450_.jpg'}}
           />
-          <Text>{JSON.stringify(data)}</Text>
+          <Text style={{ width: '60%' }}>
+            {JSON.stringify(data)}
+          </Text>
         </>
       )}
     </View>
