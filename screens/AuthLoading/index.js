@@ -1,1 +1,1 @@
-export { AuthLoading } from './AuthLoading'
+export { AuthLoading } from './AuthLoading';

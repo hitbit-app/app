@@ -5,13 +5,15 @@ import { ApolloProvider } from 'react-apollo';
 import {
   createStackNavigator,
   createSwitchNavigator,
-  createAppContainer
+  createAppContainer,
 } from 'react-navigation';
 
-import { Login } from './screens/Login'
-import { Home } from './screens/Home'
-import { AuthLoading } from './screens/AuthLoading'
-import Reactotron from 'reactotron-react-native'
+import { Login } from './screens/Login';
+import { Home } from './screens/Home';
+import { AuthLoading } from './screens/AuthLoading';
+import Reactotron from 'reactotron-react-native';
+
+/* global __DEV__ */
 
 const client = new ApolloClient({
   uri: 'https://yarc-app.herokuapp.com',
@@ -20,10 +22,10 @@ const client = new ApolloClient({
     const userToken = await AsyncStorage.getItem('userToken');
     operation.setContext({
       headers: {
-        authorization: userToken ? `Bearer ${userToken}` : ''
-      }
+        authorization: userToken ? `Bearer ${userToken}` : '',
+      },
     });
-  }
+  },
 });
 
 const AppStack = createStackNavigator(
@@ -53,7 +55,7 @@ export default function App() {
     Reactotron
       .configure({ host: '192.168.1.4' })
       .useReactNative()
-      .connect()
+      .connect();
   }
 
   return (
