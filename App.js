@@ -11,9 +11,7 @@ import {
 import { Login } from './screens/Login';
 import { Home } from './screens/Home';
 import { AuthLoading } from './screens/AuthLoading';
-import Reactotron from 'reactotron-react-native';
-
-/* global __DEV__ */
+import './Reactotron';
 
 const client = new ApolloClient({
   uri: 'https://yarc-app.herokuapp.com',
@@ -31,6 +29,7 @@ const client = new ApolloClient({
 const AppStack = createStackNavigator(
   { Home: Home }
 );
+
 const AuthStack = createStackNavigator(
   { Login: Login }
 );
@@ -47,17 +46,6 @@ const AppWrapper = createAppContainer(createSwitchNavigator(
 ));
 
 export default function App() {
-  if (__DEV__) {
-    // Reactotron is a RN inspector for
-    // easier debugging. Change the `host` key
-    // with your Expo IP.
-    // https://github.com/infinitered/reactotron/
-    Reactotron
-      .configure({ host: '192.168.1.4' })
-      .useReactNative()
-      .connect();
-  }
-
   return (
     <ApolloProvider client={client}>
       <AppWrapper />
