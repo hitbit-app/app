@@ -16,7 +16,7 @@ const GET_HOME_DATA = gql`
 `;
 
 export function Home() {
-  const { loading, error, data } = useQuery(GET_HOME_DATA)
+  const { loading, error, data } = useQuery(GET_HOME_DATA);
   return (
     <View style={styles.container}>
       {!!error && error.message}
@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 150,
-    height: 220
-  }
+    height: 220,
+  },
 });

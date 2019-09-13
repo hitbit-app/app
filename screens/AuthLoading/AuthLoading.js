@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { AsyncStorage, StyleSheet, View, Text } from 'react-native';
+import { PropTypes } from 'prop-types';
 
 export function AuthLoading({ navigation }) {
   useEffect(() => {
     const authenticate = async () => {
       try {
-        const userToken = await AsyncStorage.getItem('userToken')
+        const userToken = await AsyncStorage.getItem('userToken');
         navigation.navigate(userToken ? 'App' : 'Auth');
       } catch(e) {
         navigation.navigate('Auth');
       }
-    }
+    };
 
-    authenticate()
-  }, [])
+    authenticate();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -28,5 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
+
+AuthLoading.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

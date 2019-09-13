@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { AsyncStorage, StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { PropTypes } from 'prop-types';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -15,13 +16,13 @@ export function Login({ navigation }) {
   const [login, { error, loading }] = useMutation(LOGIN, {
     variables: {
       email,
-      password
+      password,
     },
     onError: () => {},
     onCompleted: async ({ login: token }) => {
-      await AsyncStorage.setItem('userToken', token)
-      navigation.navigate('Home')
-    }
+      await AsyncStorage.setItem('userToken', token);
+      navigation.navigate('Home');
+    },
   });
 
   return (
@@ -65,6 +66,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });
+
+Login.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
