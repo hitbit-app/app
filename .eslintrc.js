@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* eslint no-unused-vars: [ "error", { "varsIgnorePattern": "off|warn|error" } ] */
+
 const off = 0;
 const warn = 1;
 const error = 2;
@@ -6,6 +9,11 @@ module.exports = {
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended',
+  ],
+
+  'plugins': [
+    'react',
+    'react-hooks',
   ],
 
   'parserOptions': {
@@ -46,5 +54,8 @@ module.exports = {
     'space-unary-ops': warn,
     'space-infix-ops': warn,
     'unicode-bom': warn,
+
+    'react-hooks/rules-of-hooks': error,
+    'react-hooks/exhaustive-deps': warn,
   },
 };
