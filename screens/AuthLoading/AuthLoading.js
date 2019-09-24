@@ -14,7 +14,7 @@ export function AuthLoading({ navigation }) {
     };
 
     authenticate();
-  }, []);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
