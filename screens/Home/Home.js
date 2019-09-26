@@ -19,7 +19,7 @@ export function Home() {
   const { loading, error, data } = useQuery(GET_HOME_DATA);
   return (
     <View style={styles.container}>
-      {!!error && error.message}
+      {!!error && <Text>{error.message}</Text>}
       {loading && <Text>Loading...</Text>}
       {!loading && (
         <>
