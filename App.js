@@ -24,6 +24,20 @@ const client = new ApolloClient({
       },
     });
   },
+  onError: ({ graphQLErrors }) => {
+    /*
+     * When userToken is expired or not longer valid for some reason
+     * the BE gives the 'unauthorized' message.
+     * We may want to show an error or redirect to the login screen,
+     * but for now we'll just remove stale token.
+     */
+    const unauthorized = graphQLErrors
+      .some(error => error.message === 'unauthorized');
+
+    if (unauthorized) {
+      AsyncStorage.removeItem('userToken');
+    }
+  },
 });
 
 const AppStack = createStackNavigator(
