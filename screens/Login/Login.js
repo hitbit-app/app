@@ -1,74 +1,100 @@
-import React, { useState } from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-import { AsyncStorage, StyleSheet, View, Text, Button, TextInput } from 'react-native';
-import { PropTypes } from 'prop-types';
-
-const LOGIN = gql`
-  mutation Login($email: String, $password: String) {
-    login(email: $email, password: $password)
-  }
-`;
+import React, { useState, useRef } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+  KeyboardAvoidingView,
+  ScrollView
+} from "react-native";
+import { PropTypes } from "prop-types";
+import { LinearGradient } from "expo-linear-gradient";
+import { useLoginMutation } from "../../AuthManager";
 
 export function Login({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [login, { error, loading }] = useMutation(LOGIN, {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, { error, loading }] = useLoginMutation({
     variables: {
       email,
       password,
     },
-    onError: () => {},
-    onCompleted: async ({ login: token }) => {
-      await AsyncStorage.setItem('userToken', token);
-      navigation.navigate('Home');
-    },
+    onCompleted: () => navigation.navigate("Home")
   });
 
+  const logo = require("../../assets/Logo_light.png");
+  const styles = require("../../styles/styles");
+
+  const passwordInput = useRef(null);
+
   return (
-    <View style={styles.container}>
-      <Text>Email</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-      />
+    <LinearGradient
+      colors={["#002F49", "#0054D8", "#0076F1", "#00ECF6"]}
+      start={[1, 0]}
+      end={[0, 1]}
+      locations={[0, 0.44, 0.73, 1]}
+      style={styles.container}
+    >
+      <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollViewStyle}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+          <StatusBar backgroundColor="transparent" barStyle="light-content" />
+          <Image style={styles.logo} source={logo} />
 
-      <Text>Password</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-      />
+          <View style={styles.form}>
+            <TextInput
+              placeholder="Email or Username"
+              placeholderTextColor="#848484"
+              style={styles.input}
+              onChangeText={text => setEmail(text)}
+              value={email}
+              autoCompleteType='email'
+              textContentType='emailAddress'
+              autoCapitalize='none'
+              returnKeyType={"next"}
+              onSubmitEditing={() => {
+                passwordInput.current.focus();
+              }}
+            />
 
-      <Button
-        onPress={login}
-        title="Log in"
-        color="#002ade"
-        disabled={loading}
-      />
-      {error && <Text>{error.message}</Text>}
-      {loading && <Text>Loading...</Text>}
-    </View>
+            <TextInput
+              ref={passwordInput}
+              placeholder="Password"
+              placeholderTextColor="#848484"
+              style={styles.input}
+              onChangeText={text => setPassword(text)}
+              value={password}
+              secureTextEntry={true}
+              returnKeyType={"go"}
+              onSubmitEditing={login}
+            />
+
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.button} onPress={login}>
+                <Text style={styles.buttonText}>Log In</Text>
+              </TouchableOpacity>
+
+              <View style={styles.alternative}>
+                <Text style={styles.text}>Don't have an account yet?</Text>
+                <TouchableOpacity
+                  styles={styles.secondaryButton}
+                  onPress={() => navigation.navigate("SignUp")}
+                  >
+                    <Text style={styles.buttonTextLight}>Sign Up</Text>
+                </TouchableOpacity>
+                <Text style={styles.text}>now!</Text>
+              </View>
+            </View>
+
+            {error && <Text>{error.message}</Text>}
+            {loading && <Text>Loading...</Text>}
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
-    width: '70%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-  },
-});
 
 Login.propTypes = {
   navigation: PropTypes.shape({
