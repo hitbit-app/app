@@ -21,6 +21,14 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 30,
+    paddingBottom: 10,
+    borderBottomColor: '#002F49',
+    borderBottomWidth: 1,
+  },
   form: {
     width: '70%',
     flex: 1,
@@ -81,5 +89,10 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'flex-start',
+  },
+  logoSmall: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
   },
 });
