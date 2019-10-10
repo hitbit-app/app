@@ -15,7 +15,7 @@ import { getToken, removeToken } from './AuthManager';
 import './Reactotron';
 
 const client = new ApolloClient({
-  uri: 'https://yarc-app.herokuapp.com',
+  uri: 'https://hitbit-app.herokuapp.com',
   credentials: 'include',
   request: async operation => {
     const userToken = await getToken();
