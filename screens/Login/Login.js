@@ -1,25 +1,35 @@
 import React, { useState, useRef } from "react";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
 import {
+  AsyncStorage,
+  StyleSheet,
+  ScrollView,
   View,
   Text,
+  Button,
   TextInput,
+  KeyboardAvoidingView,
+  StatusBar,
   TouchableOpacity,
   Image,
-  StatusBar,
-  KeyboardAvoidingView,
-  ScrollView
 } from "react-native";
 import { PropTypes } from "prop-types";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLoginMutation } from "../../AuthManager";
+
+const LOGIN = gql`
+  mutation Login($email: String, $password: String) {
+    login(email: $email, password: $password)
+  }
+`;
 
 export function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { error, loading }] = useLoginMutation({
+  const [login, { error, loading }] = useMutation(LOGIN, {
     variables: {
       email,
-      password,
+      password
     },
     onCompleted: () => navigation.navigate("Home")
   });
@@ -98,6 +108,6 @@ export function Login({ navigation }) {
 
 Login.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+    navigate: PropTypes.func.isRequired
+  }).isRequired
 };

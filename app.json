@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "yarc",
-    "slug": "yarc-app",
+    "name": "HitBit",
+    "slug": "hit-bit",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -13,9 +13,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Logo.svg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "blue"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
