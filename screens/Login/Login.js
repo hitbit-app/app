@@ -1,21 +1,18 @@
-import React, { useState, useRef } from "react";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import React, { useState, useRef } from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 import {
-  AsyncStorage,
-  StyleSheet,
   ScrollView,
   View,
   Text,
-  Button,
   TextInput,
   KeyboardAvoidingView,
   StatusBar,
   TouchableOpacity,
-  Image,
-} from "react-native";
-import { PropTypes } from "prop-types";
-import { LinearGradient } from "expo-linear-gradient";
+} from 'react-native';
+import { PropTypes } from 'prop-types';
+import { LinearGradient } from 'expo-linear-gradient';
+import Logo from '../../assets/Logo.svg';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -24,24 +21,23 @@ const LOGIN = gql`
 `;
 
 export function Login({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [login, { error, loading }] = useMutation(LOGIN, {
     variables: {
       email,
-      password
+      password,
     },
-    onCompleted: () => navigation.navigate("Home")
+    onCompleted: () => navigation.navigate('Home'),
   });
 
-  const logo = require("../../assets/Logo_light.png");
-  const styles = require("../../styles/styles");
+  const styles = require('../../styles/styles');
 
   const passwordInput = useRef(null);
 
   return (
     <LinearGradient
-      colors={["#002F49", "#0054D8", "#0076F1", "#00ECF6"]}
+      colors={['#002F49', '#0054D8', '#0076F1', '#00ECF6']}
       start={[1, 0]}
       end={[0, 1]}
       locations={[0, 0.44, 0.73, 1]}
@@ -50,7 +46,8 @@ export function Login({ navigation }) {
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollViewStyle}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
-          <Image style={styles.logo} source={logo} />
+
+          <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
 
           <View style={styles.form}>
             <TextInput
@@ -59,10 +56,10 @@ export function Login({ navigation }) {
               style={styles.input}
               onChangeText={text => setEmail(text)}
               value={email}
-              autoCompleteType='email'
-              textContentType='emailAddress'
-              autoCapitalize='none'
-              returnKeyType={"next"}
+              autoCompleteType="email"
+              textContentType="emailAddress"
+              autoCapitalize="none"
+              returnKeyType={'next'}
               onSubmitEditing={() => {
                 passwordInput.current.focus();
               }}
@@ -76,7 +73,7 @@ export function Login({ navigation }) {
               onChangeText={text => setPassword(text)}
               value={password}
               secureTextEntry={true}
-              returnKeyType={"go"}
+              returnKeyType={'go'}
               onSubmitEditing={login}
             />
 
@@ -86,12 +83,12 @@ export function Login({ navigation }) {
               </TouchableOpacity>
 
               <View style={styles.alternative}>
-                <Text style={styles.text}>Don't have an account yet?</Text>
+                <Text style={styles.text}>Don&apos;t have an account yet?</Text>
                 <TouchableOpacity
                   styles={styles.secondaryButton}
-                  onPress={() => navigation.navigate("SignUp")}
-                  >
-                    <Text style={styles.buttonTextLight}>Sign Up</Text>
+                  onPress={() => navigation.navigate('SignUp')}
+                >
+                  <Text style={styles.buttonTextLight}>Sign Up</Text>
                 </TouchableOpacity>
                 <Text style={styles.text}>now!</Text>
               </View>
@@ -108,6 +105,6 @@ export function Login({ navigation }) {
 
 Login.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
