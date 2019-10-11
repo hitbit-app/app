@@ -8,15 +8,12 @@ var {
 
 module.exports = StyleSheet.create({
   container: {
-  },
-  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     width: '100%',
+    padding: 10,
   },
   buttonText: {
     color: '#000000',
-  },
-  post: {
-    width: '90%',
-    margin: 5,
   },
 });

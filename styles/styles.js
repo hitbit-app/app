@@ -67,6 +67,16 @@ module.exports = StyleSheet.create({
     borderRadius: 8,
     margin: 3,
   },
+  logOutButton: {
+    position: 'absolute',
+    right: 0,
+    color: 'blue',
+    padding: 10,
+    paddingHorizontal: 25,
+    backgroundColor: '#FFB20C',
+    borderRadius: 8,
+    margin: 3,
+  },
   buttonText: {
     fontSize: 25,
     textAlign: 'center',

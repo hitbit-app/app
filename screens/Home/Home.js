@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import {
@@ -9,6 +9,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import { removeToken } from '../../AuthManager';
+import AudioPlayer from '../../elements/AudioPlayer/AudioPlayer.js';
+import { Audio } from 'expo-av';
 
 import Logo from '../../assets/Logo.svg';
 import styles from '../../styles/homeStyle';
@@ -16,19 +18,31 @@ import universalStyle from '../../styles/styles';
 
 
 const GET_HOME_DATA = gql`
-  query LatestPosts {
+  query HomeData {
+    userInfo {
+      id
+      username
+    }
     latestPosts {
       id
       audioUrl
       author {
+        id
         username
       }
     }
-}
+  }
 `;
 
 export function Home() {
   const { loading, error, data, refetch } = useQuery(GET_HOME_DATA);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+    refetch().then(() => setRefreshing(false)).catch();
+  };
 
   return (
     <View style={universalStyle.container}>
@@ -44,20 +58,23 @@ export function Home() {
       {!!error && <Text>{error.message}</Text>}
       {loading && <Text>Loading...</Text>}
       {!loading && (
-        <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollViewStyle}>
-
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          style={styles.scrollViewStyle}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+          }
+        >
           {data.latestPosts.map((post, index) => {
             return (
-              <View>
-                <Text>{post.author.username}</Text>
-                <Text>{post.audioUrl}</Text>
+              <View key={post.id} style={styles.post}>
+                <AudioPlayer
+                  source={post.audioUrl}
+                  author={post.author.username}
+                />
               </View>
             );
           })}
-
-          <TouchableOpacity style={universalStyle.button} onPress={removeToken}>
-            <Text style={universalStyle.buttonText}>Log Out</Text>
-          </TouchableOpacity>
         </ScrollView>
       )}
     </View>
