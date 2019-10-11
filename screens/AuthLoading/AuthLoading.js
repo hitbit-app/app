@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { getToken, onTokenChange } from '../../AuthManager';
+import { getAccessToken, onTokenChange } from '../../AuthManager';
 
 export function AuthLoading({ navigation }) {
   useEffect(() => {
     const authenticate = async () => {
       try {
-        const userToken = await getToken();
-        navigation.navigate(userToken ? 'App' : 'Auth');
+        const accessToken = await getAccessToken();
+        navigation.navigate(accessToken ? 'App' : 'Auth');
       } catch(e) {
         navigation.navigate('Auth');
       }

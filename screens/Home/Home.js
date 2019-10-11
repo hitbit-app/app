@@ -8,13 +8,12 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import { removeToken } from '../../AuthManager';
+import { removeAccessToken } from '../../AuthManager';
 import AudioPlayer from '../../components/AudioPlayer/AudioPlayer';
 
 import Logo from '../../assets/Logo.svg';
 import styles from '../../styles/homeStyle';
 import universalStyle from '../../styles/styles';
-
 
 const GET_HOME_DATA = gql`
   query HomeData {

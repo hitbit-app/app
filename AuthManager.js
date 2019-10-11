@@ -15,8 +15,9 @@ export function useLoginMutation({ variables, onError, onCompleted }) {
     variables,
     onError,
     onCompleted: data => {
+      console.log(data)
       const { login: token } = data;
-      setToken(token);
+      setAccessToken(token);
 
       if (typeof onCompleted === 'function') {
         onCompleted(data);
@@ -35,20 +36,20 @@ export function onTokenChange(obs) {
   tokenObservers.push(obs);
 }
 
-let tokenPromise = AsyncStorage.getItem('userToken');
+let tokenPromise = AsyncStorage.getItem('accessToken');
 
-export function getToken() {
+export function getAccessToken() {
   return tokenPromise;
 }
 
-export function setToken(token) {
+export function setAccessToken(token) {
   tokenPromise = Promise.resolve(token);
-  AsyncStorage.setItem('userToken', token);
+  AsyncStorage.setItem('accessToken', token);
   notifyObservers(token);
 }
 
-export function removeToken() {
+export function removeAccessToken() {
   tokenPromise = Promise.resolve();
-  AsyncStorage.removeItem('userToken');
+  AsyncStorage.removeItem('accessToken');
   notifyObservers();
 }
