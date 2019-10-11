@@ -40,24 +40,24 @@ const AppStack = createStackNavigator(
   { Home: Home }
 );
 
-const AuthStack = createStackNavigator(
-  { Login: {
-      screen: Login,
-      navigationOptions: {
-        header: null,
-      },
+const AuthStack = createStackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null,
     },
- }
+  },
+}
 );
 
-const SignUpStack = createStackNavigator(
-  { SignUp: {
-      screen: SignUp,
-      navigationOptions: {
-        header: null,
-      },
+const SignUpStack = createStackNavigator({
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: {
+      header: null,
     },
-  }
+  },
+}
 );
 
 const AppWrapper = createAppContainer(createSwitchNavigator(

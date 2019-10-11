@@ -1,21 +1,19 @@
-import React, { useState, useRef } from "react";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import React, { useState, useRef } from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 import {
-  AsyncStorage,
-  StyleSheet,
   ScrollView,
   View,
   Text,
-  Button,
   TextInput,
   KeyboardAvoidingView,
   StatusBar,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { PropTypes } from "prop-types";
-import { LinearGradient } from "expo-linear-gradient";
+} from 'react-native';
+import { PropTypes } from 'prop-types';
+import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../../styles/styles';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -24,24 +22,23 @@ const LOGIN = gql`
 `;
 
 export function Login({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [login, { error, loading }] = useMutation(LOGIN, {
     variables: {
       email,
-      password
+      password,
     },
-    onCompleted: () => navigation.navigate("Home")
+    onCompleted: () => navigation.navigate('Home'),
   });
 
-  const logo = require("../../assets/Logo_light.png");
-  const styles = require("../../styles/styles");
+  const logo = require('../../assets/Logo_light.png');
 
-  const passwordInput = useRef(null);
+  const passwordInputRef = useRef(null);
 
   return (
     <LinearGradient
-      colors={["#002F49", "#0054D8", "#0076F1", "#00ECF6"]}
+      colors={['#002F49', '#0054D8', '#0076F1', '#00ECF6']}
       start={[1, 0]}
       end={[0, 1]}
       locations={[0, 0.44, 0.73, 1]}
@@ -59,42 +56,49 @@ export function Login({ navigation }) {
               style={styles.input}
               onChangeText={text => setEmail(text)}
               value={email}
-              autoCompleteType='email'
-              textContentType='emailAddress'
-              autoCapitalize='none'
-              returnKeyType={"next"}
+              autoCompleteType="email"
+              textContentType="emailAddress"
+              autoCapitalize="none"
+              returnKeyType="next"
               onSubmitEditing={() => {
-                passwordInput.current.focus();
+                passwordInputRef.current.focus();
               }}
             />
 
             <TextInput
-              ref={passwordInput}
+              ref={passwordInputRef}
               placeholder="Password"
               placeholderTextColor="#848484"
               style={styles.input}
               onChangeText={text => setPassword(text)}
               value={password}
               secureTextEntry={true}
-              returnKeyType={"go"}
+              returnKeyType="go"
               onSubmitEditing={login}
             />
 
             <View style={styles.buttons}>
+
               <TouchableOpacity style={styles.button} onPress={login}>
                 <Text style={styles.buttonText}>Log In</Text>
               </TouchableOpacity>
 
               <View style={styles.alternative}>
-                <Text style={styles.text}>Don't have an account yet?</Text>
+
+                <Text style={styles.text}>Don&apos;t have an account yet?</Text>
+                
                 <TouchableOpacity
                   styles={styles.secondaryButton}
-                  onPress={() => navigation.navigate("SignUp")}
-                  >
-                    <Text style={styles.buttonTextLight}>Sign Up</Text>
+                  onPress={() => navigation.navigate('SignUp')}
+                >
+
+                  <Text style={styles.buttonTextLight}>Sign Up</Text>
+
                 </TouchableOpacity>
                 <Text style={styles.text}>now!</Text>
+
               </View>
+
             </View>
 
             {error && <Text>{error.message}</Text>}
@@ -108,6 +112,6 @@ export function Login({ navigation }) {
 
 Login.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
