@@ -43,8 +43,8 @@ export function SignUp({ navigation }) {
   const loading = signUpState.loading || loginState.loading;
   const styles = require('../../styles/styles');
 
-  const emailInput = useRef(null);
-  const passwordInput = useRef(null);
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
 
   return (
     <LinearGradient
@@ -70,12 +70,12 @@ export function SignUp({ navigation }) {
               value={username}
               returnKeyType={ 'next' }
               onSubmitEditing={() => {
-                emailInput.current.focus();
+              emailInputRef.current.focus();
               }}
             />
 
             <TextInput
-              ref={emailInput}
+              ref={emailInputRef}
               placeholder="Email"
               placeholderTextColor="#848484"
               style={styles.input}
@@ -84,21 +84,21 @@ export function SignUp({ navigation }) {
               autoCompleteType="email"
               textContentType="emailAddress"
               autoCapitalize="none"
-              returnKeyType={'next'}
+              returnKeyType="next"
               onSubmitEditing={() => {
-                passwordInput.current.focus();
+              passwordInputRef.current.focus();
               }}
             />
 
             <TextInput
-              ref={passwordInput}
+              ref={passwordInputRef}
               placeholder="Password"
               placeholderTextColor="#848484"
               style={styles.input}
               onChangeText={setPassword}
               value={password}
               secureTextEntry={true}
-              returnKeyType={'go'}
+              returnKeyType="go"
               onSubmitEditing={signUp}
             />
 

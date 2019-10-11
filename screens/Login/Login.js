@@ -33,7 +33,7 @@ export function Login({ navigation }) {
 
   const styles = require('../../styles/styles');
 
-  const passwordInput = useRef(null);
+  const passwordInputRef = useRef(null);
 
   return (
     <LinearGradient
@@ -59,39 +59,47 @@ export function Login({ navigation }) {
               autoCompleteType="email"
               textContentType="emailAddress"
               autoCapitalize="none"
-              returnKeyType={'next'}
+              returnKeyType="next"
+
               onSubmitEditing={() => {
-                passwordInput.current.focus();
+                passwordInputRef.current.focus();
               }}
             />
 
             <TextInput
-              ref={passwordInput}
+              ref={passwordInputRef}
               placeholder="Password"
               placeholderTextColor="#848484"
               style={styles.input}
               onChangeText={text => setPassword(text)}
               value={password}
               secureTextEntry={true}
-              returnKeyType={'go'}
+              returnKeyType="go"
               onSubmitEditing={login}
             />
 
             <View style={styles.buttons}>
+
               <TouchableOpacity style={styles.button} onPress={login}>
                 <Text style={styles.buttonText}>Log In</Text>
               </TouchableOpacity>
 
               <View style={styles.alternative}>
+
                 <Text style={styles.text}>Don&apos;t have an account yet?</Text>
+
                 <TouchableOpacity
                   styles={styles.secondaryButton}
                   onPress={() => navigation.navigate('SignUp')}
                 >
+
                   <Text style={styles.buttonTextLight}>Sign Up</Text>
+
                 </TouchableOpacity>
                 <Text style={styles.text}>now!</Text>
+
               </View>
+
             </View>
 
             {error && <Text>{error.message}</Text>}

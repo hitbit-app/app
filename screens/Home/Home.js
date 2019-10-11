@@ -1,8 +1,8 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { removeToken } from "../../AuthManager";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { removeToken } from '../../AuthManager';
 
 const GET_HOME_DATA = gql`
   query LatestPosts {
@@ -32,10 +32,10 @@ export function Home() {
             style={styles.image}
             source={{
               uri:
-                "https://images-na.ssl-images-amazon.com/images/I/61hhqctNtJL._SY450_.jpg"
+                'https://images-na.ssl-images-amazon.com/images/I/61hhqctNtJL._SY450_.jpg',
             }}
           />
-          <Text style={{ width: "60%" }}>{JSON.stringify(data)}</Text>
+          <Text style={{ width: '60%' }}>{JSON.stringify(data)}</Text>
         </>
       )}
     </View>
@@ -45,12 +45,12 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   image: {
     width: 150,
-    height: 220
-  }
+    height: 220,
+  },
 });
