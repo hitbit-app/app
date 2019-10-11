@@ -41,9 +41,9 @@ export function Login({ navigation }) {
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
 
-          <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
 
           <View style={styles.form}>
+            <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
             <TextInput
               placeholder="Email or Username"
               placeholderTextColor="#848484"
