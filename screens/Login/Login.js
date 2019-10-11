@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { PropTypes } from "prop-types";
 import { LinearGradient } from "expo-linear-gradient";
+import Logo from '../../assets/Logo.svg';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -34,7 +35,6 @@ export function Login({ navigation }) {
     onCompleted: () => navigation.navigate("Home")
   });
 
-  const logo = require("../../assets/Logo_light.png");
   const styles = require("../../styles/styles");
 
   const passwordInput = useRef(null);
@@ -50,7 +50,8 @@ export function Login({ navigation }) {
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollViewStyle}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
-          <Image style={styles.logo} source={logo} />
+
+          <Logo width={100} height={100} style={styles.logo} fill='#ffffff'/>
 
           <View style={styles.form}>
             <TextInput
