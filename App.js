@@ -1,6 +1,5 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost';
-import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import {
   createStackNavigator,
@@ -9,20 +8,31 @@ import {
 } from 'react-navigation';
 
 import { Login } from './screens/Login';
+import { SignUp } from './screens/SignUp';
 import { Home } from './screens/Home';
 import { AuthLoading } from './screens/AuthLoading';
+import { getToken, removeToken } from './AuthManager';
 import './Reactotron';
 
 const client = new ApolloClient({
   uri: 'https://yarc-app.herokuapp.com',
   credentials: 'include',
   request: async operation => {
-    const userToken = await AsyncStorage.getItem('userToken');
+    const userToken = await getToken();
     operation.setContext({
       headers: {
         authorization: userToken ? `Bearer ${userToken}` : '',
       },
     });
+  },
+  onError: ({ graphQLErrors }) => {
+    /*
+     * When userToken is expired or not longer valid for some reason
+     * the BE gives the 'unauthorized' message
+     */
+    if (graphQLErrors.some(e => e.message === 'unauthorized')) {
+      removeToken();
+    }
   },
 });
 
@@ -31,7 +41,23 @@ const AppStack = createStackNavigator(
 );
 
 const AuthStack = createStackNavigator(
-  { Login: Login }
+  { Login: {
+      screen: Login,
+      navigationOptions: {
+        header: null,
+      },
+    },
+ }
+);
+
+const SignUpStack = createStackNavigator(
+  { SignUp: {
+      screen: SignUp,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  }
 );
 
 const AppWrapper = createAppContainer(createSwitchNavigator(
@@ -39,6 +65,7 @@ const AppWrapper = createAppContainer(createSwitchNavigator(
     AuthLoading: AuthLoading,
     App: AppStack,
     Auth: AuthStack,
+    SignUp: SignUpStack,
   },
   {
     initialRouteName: 'AuthLoading',
