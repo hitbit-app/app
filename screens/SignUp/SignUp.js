@@ -14,6 +14,7 @@ import { PropTypes } from 'prop-types';
 import { useLoginMutation } from '../../AuthManager';
 import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '../../assets/Logo.svg';
+import styles from '../../styles/styles.js';
 
 const SIGNUP = gql`
   mutation SignUp($username: String!, $email: String!, $password: String!) {
@@ -41,7 +42,6 @@ export function SignUp({ navigation }) {
     onCompleted: login,
   });
   const loading = signUpState.loading || loginState.loading;
-  const styles = require('../../styles/styles');
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
@@ -68,9 +68,9 @@ export function SignUp({ navigation }) {
               style={styles.input}
               onChangeText={setUsername}
               value={username}
-              returnKeyType={ 'next' }
+              returnKeyType="next"
               onSubmitEditing={() => {
-              emailInputRef.current.focus();
+                emailInputRef.current.focus();
               }}
             />
 
@@ -86,7 +86,7 @@ export function SignUp({ navigation }) {
               autoCapitalize="none"
               returnKeyType="next"
               onSubmitEditing={() => {
-              passwordInputRef.current.focus();
+                passwordInputRef.current.focus();
               }}
             />
 
