@@ -1,19 +1,18 @@
-import React, { useState, useRef } from "react";
-import gql from "graphql-tag";
+import React, { useState, useRef } from 'react';
+import gql from 'graphql-tag';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StatusBar,
-  Image,
   KeyboardAvoidingView,
-  ScrollView
-} from "react-native";
-import { useMutation } from "@apollo/react-hooks";
-import { PropTypes } from "prop-types";
-import { useLoginMutation } from "../../AuthManager";
-import { LinearGradient } from "expo-linear-gradient";
+  ScrollView,
+} from 'react-native';
+import { useMutation } from '@apollo/react-hooks';
+import { PropTypes } from 'prop-types';
+import { useLoginMutation } from '../../AuthManager';
+import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '../../assets/Logo.svg';
 
 const SIGNUP = gql`
@@ -23,33 +22,33 @@ const SIGNUP = gql`
 `;
 
 export function SignUp({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [login, loginState] = useLoginMutation({
     variables: {
       email,
-      password
+      password,
     },
-    onCompleted: () => navigation.navigate("Home")
+    onCompleted: () => navigation.navigate('Home'),
   });
   const [signUp, signUpState] = useMutation(SIGNUP, {
     variables: {
       username,
       email,
-      password
+      password,
     },
-    onCompleted: login
+    onCompleted: login,
   });
   const loading = signUpState.loading || loginState.loading;
-  const styles = require("../../styles/styles");
+  const styles = require('../../styles/styles');
 
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
 
   return (
     <LinearGradient
-      colors={["#002F49", "#0054D8", "#0076F1", "#00ECF6"]}
+      colors={['#002F49', '#0054D8', '#0076F1', '#00ECF6']}
       start={[1, 0]}
       end={[0, 1]}
       locations={[0, 0.44, 0.73, 1]}
@@ -60,7 +59,7 @@ export function SignUp({ navigation }) {
           behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
 
-          <Logo width={100} height={100} style={styles.logo} fill='#ffffff'/>
+          <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
 
           <View style={styles.form}>
             <TextInput
@@ -69,8 +68,10 @@ export function SignUp({ navigation }) {
               style={styles.input}
               onChangeText={setUsername}
               value={username}
-              returnKeyType={ "next" }
-              onSubmitEditing={() => { emailInput.current.focus(); }}
+              returnKeyType={ 'next' }
+              onSubmitEditing={() => {
+                emailInput.current.focus();
+              }}
             />
 
             <TextInput
@@ -80,11 +81,13 @@ export function SignUp({ navigation }) {
               style={styles.input}
               onChangeText={text => setEmail(text)}
               value={email}
-              autoCompleteType='email'
-              textContentType='emailAddress'
-              autoCapitalize='none'
-              returnKeyType={"next"}
-              onSubmitEditing={() => { passwordInput.current.focus(); }}
+              autoCompleteType="email"
+              textContentType="emailAddress"
+              autoCapitalize="none"
+              returnKeyType={'next'}
+              onSubmitEditing={() => {
+                passwordInput.current.focus();
+              }}
             />
 
             <TextInput
@@ -95,7 +98,7 @@ export function SignUp({ navigation }) {
               onChangeText={setPassword}
               value={password}
               secureTextEntry={true}
-              returnKeyType={"go"}
+              returnKeyType={'go'}
               onSubmitEditing={signUp}
             />
 
@@ -108,7 +111,7 @@ export function SignUp({ navigation }) {
                 <Text style={styles.text}>Already have an account?</Text>
                 <TouchableOpacity
                   style={styles.secondaryButton}
-                  onPress={() => navigation.navigate("Login")}
+                  onPress={() => navigation.navigate('Login')}
                 >
                   <Text style={styles.buttonTextLight}>Log In</Text>
                 </TouchableOpacity>
@@ -128,6 +131,6 @@ export function SignUp({ navigation }) {
 
 SignUp.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
