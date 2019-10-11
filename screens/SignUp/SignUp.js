@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-  Image,
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
@@ -14,6 +13,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { PropTypes } from 'prop-types';
 import { useLoginMutation } from '../../AuthManager';
 import { LinearGradient } from 'expo-linear-gradient';
+import Logo from '../../assets/Logo.svg';
 
 const SIGNUP = gql`
   mutation SignUp($username: String!, $email: String!, $password: String!) {
@@ -41,7 +41,6 @@ export function SignUp({ navigation }) {
     onCompleted: login,
   });
   const loading = signUpState.loading || loginState.loading;
-  const logo = require('../../assets/Logo_light.png');
   const styles = require('../../styles/styles');
 
   const emailInputRef = useRef(null);
@@ -60,7 +59,7 @@ export function SignUp({ navigation }) {
           behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
 
-          <Image style={styles.logo} source={logo} />
+          <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
 
           <View style={styles.form}>
             <TextInput
@@ -71,7 +70,7 @@ export function SignUp({ navigation }) {
               value={username}
               returnKeyType={ 'next' }
               onSubmitEditing={() => {
-                emailInputRef.current.focus();
+              emailInputRef.current.focus();
               }}
             />
 
@@ -87,7 +86,7 @@ export function SignUp({ navigation }) {
               autoCapitalize="none"
               returnKeyType="next"
               onSubmitEditing={() => {
-                passwordInputRef.current.focus();
+              passwordInputRef.current.focus();
               }}
             />
 

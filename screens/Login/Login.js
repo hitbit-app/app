@@ -9,11 +9,10 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { LinearGradient } from 'expo-linear-gradient';
-import styles from '../../styles/styles';
+import Logo from '../../assets/Logo.svg';
 
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
@@ -32,7 +31,7 @@ export function Login({ navigation }) {
     onCompleted: () => navigation.navigate('Home'),
   });
 
-  const logo = require('../../assets/Logo_light.png');
+  const styles = require('../../styles/styles');
 
   const passwordInputRef = useRef(null);
 
@@ -47,7 +46,8 @@ export function Login({ navigation }) {
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollViewStyle}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <StatusBar backgroundColor="transparent" barStyle="light-content" />
-          <Image style={styles.logo} source={logo} />
+
+          <Logo width={100} height={100} style={styles.logo} fill="#ffffff"/>
 
           <View style={styles.form}>
             <TextInput
@@ -60,6 +60,7 @@ export function Login({ navigation }) {
               textContentType="emailAddress"
               autoCapitalize="none"
               returnKeyType="next"
+
               onSubmitEditing={() => {
                 passwordInputRef.current.focus();
               }}
@@ -86,7 +87,7 @@ export function Login({ navigation }) {
               <View style={styles.alternative}>
 
                 <Text style={styles.text}>Don&apos;t have an account yet?</Text>
-                
+
                 <TouchableOpacity
                   styles={styles.secondaryButton}
                   onPress={() => navigation.navigate('SignUp')}
