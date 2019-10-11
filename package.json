@@ -25,9 +25,7 @@
     "react-native-svg": "^9.11.1",
     "react-native-svg-transformer": "^0.13.0",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.1",
-    "semver": "^6.3.0",
-    "yarn": "^1.19.1"
+    "react-navigation": "^3.11.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1",
