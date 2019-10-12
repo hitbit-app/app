@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../../styles/styles';
+
 import Logo from '../../assets/Logo.svg';
 
 const LOGIN = gql`
@@ -30,8 +32,6 @@ export function Login({ navigation }) {
     },
     onCompleted: () => navigation.navigate('Home'),
   });
-
-  const styles = require('../../styles/styles');
 
   const passwordInputRef = useRef(null);
 
