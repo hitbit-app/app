@@ -7,16 +7,12 @@ var {
 } = React;
 
 module.exports = StyleSheet.create({
-  container: {
-  },
   contentContainer: {
     width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   buttonText: {
     color: '#000000',
-  },
-  post: {
-    width: '90%',
-    margin: 5,
   },
 });

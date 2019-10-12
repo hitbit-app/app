@@ -21,11 +21,13 @@ const GET_HOME_DATA = gql`
     userInfo {
       id
       username
+      avatarUrl
     }
     latestPosts {
       id
       audioUrl
       author {
+        avatarUrl
         id
         username
       }
@@ -59,19 +61,21 @@ export function Home() {
       {!loading && (
         <ScrollView
           contentContainerStyle={styles.contentContainer}
-          style={styles.scrollViewStyle}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
           }
         >
-          {data.latestPosts.map((post, index) => {
+          {data.latestPosts.map((post) => {
+            const isCurrentUser = post.author.id === data.userInfo.id ? true : false;
             return (
-              <View key={post.id} style={styles.post}>
-                <AudioPlayer
-                  source={post.audioUrl}
-                  author={post.author.username}
-                />
-              </View>
+              <AudioPlayer
+                key={post.id}
+                avatar={post.author.avatarUrl}
+                source={post.audioUrl}
+                author={post.author.username}
+                authorId={post.author.id}
+                myPost={isCurrentUser}
+              />
             );
           })}
         </ScrollView>
