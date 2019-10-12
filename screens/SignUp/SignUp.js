@@ -14,8 +14,7 @@ import { PropTypes } from 'prop-types';
 import { useLoginMutation } from '../../AuthManager';
 import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '../../assets/Logo.svg';
-import styles from '../../styles/styles.js';
-
+import styles from '../../styles/styles';
 const SIGNUP = gql`
   mutation SignUp($username: String!, $email: String!, $password: String!) {
     signUp(username: $username, email: $email, password: $password)
