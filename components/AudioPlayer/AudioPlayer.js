@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
+import PropTypes from 'prop-types';
 
 import PauseIcon from '../../assets/icons/pauseIcon.svg';
 import PlayIcon from '../../assets/icons/playIcon.svg';
@@ -21,6 +22,7 @@ Audio.setAudioModeAsync({
 export default function AudioPlayer(props) {
   const [sound, setSound] = useState(null);
   const [status, setStatus] = useState(null);
+
 
   useEffect(() => {
     Audio.Sound.createAsync({ uri: props.source }).then(({ sound, status }) => {
@@ -54,3 +56,10 @@ export default function AudioPlayer(props) {
     </View>
   );
 }
+
+
+AudioPlayer.propTypes = {
+  author: PropTypes.string,
+  myPost: PropTypes.bool,
+  source: PropTypes.string,
+};
