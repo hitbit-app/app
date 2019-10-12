@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { removeToken } from '../../AuthManager';
 import AudioPlayer from '../../elements/AudioPlayer/AudioPlayer.js';
-import { Audio } from 'expo-av';
 
 import Logo from '../../assets/Logo.svg';
 import styles from '../../styles/homeStyle';

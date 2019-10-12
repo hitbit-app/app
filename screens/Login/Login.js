@@ -10,12 +10,10 @@ import {
 } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { useLoginMutation } from '../../AuthManager';
 import styles from '../../styles/styles';
 
 import Logo from '../../assets/Logo.svg';
-
-import { useLoginMutation } from '../../AuthManager';
 
 export function Login({ navigation }) {
   const [email, setEmail] = useState('');
