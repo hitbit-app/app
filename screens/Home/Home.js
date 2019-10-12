@@ -60,6 +60,8 @@ export function Home() {
       {loading && <Text>Loading...</Text>}
       {!loading && (
         <ScrollView
+          showsVerticalScrollIndicator="false"
+          showsHorizontalScrollIndicator="false"
           contentContainerStyle={styles.contentContainer}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
