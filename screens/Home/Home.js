@@ -9,7 +9,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { removeToken } from '../../AuthManager';
-import AudioPlayer from '../../elements/AudioPlayer/AudioPlayer.js';
+import AudioPlayer from '../../components/AudioPlayer/AudioPlayer.js';
 
 import Logo from '../../assets/Logo.svg';
 import styles from '../../styles/homeStyle';
