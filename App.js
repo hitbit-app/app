@@ -37,7 +37,10 @@ const client = new ApolloClient({
 });
 
 const AppStack = createStackNavigator(
-  { Home: Home }
+  { Home: Home },
+  {
+    headerMode: 'none',
+  }
 );
 
 const AuthStack = createStackNavigator({

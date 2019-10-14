@@ -1,56 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import { removeToken } from '../../AuthManager';
+import AudioPlayer from '../../components/AudioPlayer/AudioPlayer';
+
+import Logo from '../../assets/Logo.svg';
+import styles from '../../styles/homeStyle';
+import universalStyle from '../../styles/styles';
+
 
 const GET_HOME_DATA = gql`
-  query LatestPosts {
+  query HomeData {
+    userInfo {
+      id
+      username
+    }
     latestPosts {
       id
-    }
-    userInfo {
-      email
-      username
+      audioUrl
+      author {
+        id
+        username
+      }
     }
   }
 `;
 
 export function Home() {
-  const { loading, error, data } = useQuery(GET_HOME_DATA);
+  const { loading, error, data, refetch } = useQuery(GET_HOME_DATA);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+    refetch().then(() => setRefreshing(false));
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={universalStyle.container}>
+      <View style={universalStyle.header}>
+        <Logo style={universalStyle.login} height={50} width={50} fill="#002F49" />
+        <TouchableOpacity
+          style={universalStyle.logOutButton}
+          onPress={removeToken}
+        >
+          <Text style={universalStyle.buttonText}>Log Out</Text>
+        </TouchableOpacity>
+      </View>
       {!!error && <Text>{error.message}</Text>}
       {loading && <Text>Loading...</Text>}
       {!loading && (
-        <>
-          <TouchableOpacity style={styles.button} onPress={removeToken}>
-            <Text style={styles.buttonText}>Log Out</Text>
-          </TouchableOpacity>
-
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                'https://images-na.ssl-images-amazon.com/images/I/61hhqctNtJL._SY450_.jpg',
-            }}
-          />
-          <Text style={{ width: '60%' }}>{JSON.stringify(data)}</Text>
-        </>
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          style={styles.scrollViewStyle}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+          }
+        >
+          {data.latestPosts.map((post, index) => {
+            return (
+              <View key={post.id} style={styles.post}>
+                <AudioPlayer
+                  source={post.audioUrl}
+                  author={post.author.username}
+                />
+              </View>
+            );
+          })}
+        </ScrollView>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: 150,
-    height: 220,
-  },
-});

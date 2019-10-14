@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M5.46428571,17 L1.82142857,17 C0.815848214,17 0,16.1841518 0,15.1785714 L0,1.82142857 C0,0.815848214 0.815848214,0 1.82142857,0 L5.46428571,0 C6.46986607,0 7.28571429,0.815848214 7.28571429,1.82142857 L7.28571429,15.1785714 C7.28571429,16.1841518 6.46986607,17 5.46428571,17 Z M17,15.1785714 L17,1.82142857 C17,0.815848214 16.1841518,0 15.1785714,0 L11.5357143,0 C10.5301339,0 9.71428571,0.815848214 9.71428571,1.82142857 L9.71428571,15.1785714 C9.71428571,16.1841518 10.5301339,17 11.5357143,17 L15.1785714,17 C16.1841518,17 17,16.1841518 17,15.1785714 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Playing-post" transform="translate(-74.000000, -33.000000)">
+            <g id="Post-Card">
+                <g id="Solid/pause" transform="translate(74.000000, 33.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask"></g>
+                    <g id="Color/Black" mask="url(#mask-2)" fill="#FCA07F" fill-rule="evenodd">
+                        <rect id="Black" x="0" y="0" width="17" height="17"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

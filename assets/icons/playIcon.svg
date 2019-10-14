@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="18px" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M3.6795302,15.8397785 L3.6795302,1.16022148 C3.6795302,0.143758389 4.90849329,-0.365271812 5.62722819,0.353463087 L12.9670067,7.69324161 C13.4125436,8.13877852 13.4125436,8.86122148 12.9670067,9.30675839 L5.62722819,16.6465369 C4.90849329,17.3653289 3.6795302,16.8562416 3.6795302,15.8397785 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-New-Post-" transform="translate(-14.000000, -37.000000)">
+            <g id="Post-Card">
+                <g id="Solid/caret-right" transform="translate(11.000000, 37.500000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask"></g>
+                    <g id="Color/Black" mask="url(#mask-2)" fill="#FCA07F" fill-rule="evenodd">
+                        <rect id="Black" x="0" y="0" width="17" height="17"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

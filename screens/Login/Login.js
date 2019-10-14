@@ -1,6 +1,4 @@
 import React, { useState, useRef } from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
 import {
   ScrollView,
   View,
@@ -12,20 +10,16 @@ import {
 } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useLoginMutation } from '../../AuthManager';
 import styles from '../../styles/styles';
 
 import Logo from '../../assets/Logo.svg';
 
-const LOGIN = gql`
-  mutation Login($email: String, $password: String) {
-    login(email: $email, password: $password)
-  }
-`;
-
 export function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { error, loading }] = useMutation(LOGIN, {
+
+  const [login, { error, loading }] = useLoginMutation({
     variables: {
       email,
       password,
