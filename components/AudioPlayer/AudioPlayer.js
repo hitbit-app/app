@@ -6,7 +6,7 @@ import PauseIcon from '../../assets/icons/pauseIcon.svg';
 import PlayIcon from '../../assets/icons/playIcon.svg';
 import BufferingIcon from '../../assets/icons/bufferingIcon.svg';
 
-import styles from '../../styles/audioPlayerStyle.js';
+import styles from '../../styles/audioPlayerStyle';
 
 Audio.setAudioModeAsync({
   playsInSilentModeIOS: true,
