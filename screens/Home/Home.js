@@ -40,7 +40,7 @@ export function Home() {
 
   const _onRefresh = () => {
     setRefreshing(true);
-    refetch().then(() => setRefreshing(false)).catch();
+    refetch().then(() => setRefreshing(false));
   };
 
   return (
