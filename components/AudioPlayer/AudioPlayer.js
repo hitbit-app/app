@@ -44,13 +44,10 @@ export default function AudioPlayer(props) {
       <TouchableOpacity
         onPress={() => (isPlaying() ? pauseAudio() : playAudio())}
       >
-        {isBuffering()
-          ?
-          <BufferingIcon height={20} width={20} />
-          :
-          isPlaying() ? <PauseIcon height={20} width={20} />
-            :
-            <PlayIcon height={20} width={20} />
+        {isBuffering() && !isPlaying() && <BufferingIcon height={20} width={20} />}
+        {isPlaying()
+          ? <PauseIcon height={20} width={20} />
+          : <PlayIcon height={20} width={20} />
         }
 
       </TouchableOpacity>
