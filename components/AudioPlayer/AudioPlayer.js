@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Slider } from 'react-native';
 import { Audio } from 'expo-av';
 import PropTypes from 'prop-types';
+import Reactotron from 'reactotron-react-native';
 
 import PauseIcon from '../../assets/icons/pauseIcon.svg';
 import PlayIcon from '../../assets/icons/playIcon.svg';
@@ -22,18 +23,34 @@ Audio.setAudioModeAsync({
 export default function AudioPlayer(props) {
   const [sound, setSound] = useState(null);
   const [status, setStatus] = useState(null);
+  const [sliding, setSliding] = useState(null);
 
+  // const duration = Audio.Sound.playbackStatus.durationMillis;
+  //
+  // _onPlaybackStatusUpdate = (playbackStatus) => {
+  //
+  // };
 
   useEffect(() => {
     Audio.Sound.createAsync({ uri: props.source }).then(({ sound, status }) => {
       setSound(sound);
       setStatus(status);
     });
+    // Audio.Sound.setStatusAsync(status);
   }, [props.source]);
 
   if (sound) {
     sound.setOnPlaybackStatusUpdate(setStatus);
+    sound.setOnPlaybackStatusUpdate(status => {
+      setStatus(status);
+    });
   }
+  // if (sound) {
+  //   sound.setOnPlaybackStatusUpdate(status => {
+  //     Reactotron.log('new status:', status);
+  //     setStatus(status);
+  //   });
+  // }
 
   const playAudio = () => sound && sound.playAsync();
   const pauseAudio = () => sound && sound.pauseAsync();
@@ -58,6 +75,14 @@ export default function AudioPlayer(props) {
           }
         </TouchableOpacity>
 
+        <Slider
+          style={styles.slider}
+          minimumValue= "0"
+          maximumValue= {status && status.durationMillis !== 0 ? status.durationMillis : '0'}
+          onValueChange=""
+          value={status && status.positionMillis !== 0 ? status.positionMillis : '0'}
+
+        />
       </View>
 
       <Text style={styles.authorName}>{props.author}</Text>

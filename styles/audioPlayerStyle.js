@@ -47,4 +47,7 @@ module.exports = StyleSheet.create({
   myPost: {
     alignItems: 'flex-end',
   },
+  slider: {
+    width: '70%',
+  },
 });
