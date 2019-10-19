@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, Slider } from 'react-native';
 import { Audio } from 'expo-av';
 import PropTypes from 'prop-types';
+import Reactotron from 'reactotron-react-native';
 
 import PauseIcon from '../../assets/icons/pauseIcon.svg';
 import PlayIcon from '../../assets/icons/playIcon.svg';
@@ -22,6 +23,7 @@ Audio.setAudioModeAsync({
 export default function AudioPlayer(props) {
   const [sound, setSound] = useState(null);
   const [status, setStatus] = useState(null);
+  const [sliding, setSliding] = useState(null);
 
   // const duration = Audio.Sound.playbackStatus.durationMillis;
   //
@@ -56,7 +58,6 @@ export default function AudioPlayer(props) {
   const isBuffering = () => status && status.isBuffering;
 
   return (
-
     <View style={[styles.post, props.myPost ? styles.myPost : '']}>
 
       <View style={[styles.track, props.myPost ? styles.myTrack : '']}>
@@ -85,6 +86,7 @@ export default function AudioPlayer(props) {
       </View>
 
       <Text style={styles.authorName}>{props.author}</Text>
+
     </View>
   );
 }
