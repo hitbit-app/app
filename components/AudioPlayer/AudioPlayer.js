@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, Image, Slider } from 'react-native';
 import { Audio } from 'expo-av';
 import PropTypes from 'prop-types';
@@ -16,14 +16,14 @@ Audio.setAudioModeAsync({
   staysActiveInBackground: true,
   interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
   shouldDuckAndroid: false,
-  playThroughEarpieceAndroid: true,
+  playThroughEarpieceAndroid: false,
   interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
 });
 
 export default function AudioPlayer(props) {
   const [sound, setSound] = useState(null);
   const [status, setStatus] = useState(null);
-  const [sliding, setSliding] = useState(null);
+  const slidingRef = useRef(false);
 
   // const duration = Audio.Sound.playbackStatus.durationMillis;
   //
@@ -41,9 +41,6 @@ export default function AudioPlayer(props) {
 
   if (sound) {
     sound.setOnPlaybackStatusUpdate(setStatus);
-    sound.setOnPlaybackStatusUpdate(status => {
-      setStatus(status);
-    });
   }
   // if (sound) {
   //   sound.setOnPlaybackStatusUpdate(status => {
@@ -56,6 +53,7 @@ export default function AudioPlayer(props) {
   const pauseAudio = () => sound && sound.pauseAsync();
   const isPlaying = () => status && status.isPlaying;
   const isBuffering = () => status && status.isBuffering;
+  const sliderValue = slidingRef.current ? undefined : status && status.positionMillis;
 
   return (
     <View style={[styles.post, props.myPost ? styles.myPost : '']}>
@@ -77,11 +75,19 @@ export default function AudioPlayer(props) {
 
         <Slider
           style={styles.slider}
-          minimumValue= "0"
-          maximumValue= {status && status.durationMillis !== 0 ? status.durationMillis : '0'}
-          onValueChange=""
-          value={status && status.positionMillis !== 0 ? status.positionMillis : '0'}
-
+          onValueChange={() => {
+            if (!slidingRef.current) {
+              slidingRef.current = true;
+            }
+          }}
+          onSlidingComplete={async value => {
+            slidingRef.current = false;
+            setStatus({ ...status, positionMillis: value });
+            await sound.setPositionAsync(value);
+          }}
+          minimumValue={0}
+          maximumValue={status && status.durationMillis}
+          value={sliderValue}
         />
       </View>
 
@@ -90,7 +96,6 @@ export default function AudioPlayer(props) {
     </View>
   );
 }
-
 
 AudioPlayer.propTypes = {
   author: PropTypes.string,
