@@ -30,6 +30,7 @@ module.exports = StyleSheet.create({
     borderBottomWidth: 1,
   },
   form: {
+    paddingTop: 90,
     width: '70%',
     flex: 1,
     alignItems: 'center',
@@ -38,7 +39,7 @@ module.exports = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    marginTop: 80,
+    marginBottom: 40,
     resizeMode: 'contain',
   },
   input: {
