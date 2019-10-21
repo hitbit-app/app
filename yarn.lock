@@ -981,6 +981,11 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
+"@hitbit/stubs@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hitbit/stubs/-/stubs-0.0.7.tgz#fb7a893bd68fc6095f1a2aa10408c31e59c49765"
+  integrity sha512-txY5cxgm7bszCfuBuNzRuAAfbzimqcwVR/4l6ZcfN2B2KEnj5IzhrGNyExMCtCR7aFXE34njKMJUMsrtXRjZeQ==
+
 "@react-native-community/cli@^1.2.1":
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.10.0.tgz#66e3c9f407763281f7060c034145650bf0d6786c"
