@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useMutation } from '@apollo/react-hooks';
 import { PropTypes } from 'prop-types';
-import { useLoginMutation } from '../../AuthManager';
+import { useLoginMutation } from '../../auth';
 import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '../../assets/Logo.svg';
 import styles from '../../styles/styles.js';

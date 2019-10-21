@@ -8,7 +8,8 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import { removeAccessToken } from '../../AuthManager';
+import { PropTypes } from 'prop-types';
+import { removeAccessToken } from '../../auth';
 import AudioPlayer from '../../components/AudioPlayer/AudioPlayer';
 
 import Logo from '../../assets/Logo.svg';
@@ -32,7 +33,7 @@ const GET_HOME_DATA = gql`
   }
 `;
 
-export function Home() {
+export function Home({ navigation }) {
   const { loading, error, data, refetch } = useQuery(GET_HOME_DATA);
 
   const [refreshing, setRefreshing] = useState(false);
@@ -48,7 +49,10 @@ export function Home() {
         <Logo style={universalStyle.login} height={50} width={50} fill="#002F49" />
         <TouchableOpacity
           style={universalStyle.logOutButton}
-          onPress={removeToken}
+          onPress={() => {
+            removeAccessToken();
+            navigation.navigate('Login');
+          }}
         >
           <Text style={universalStyle.buttonText}>Log Out</Text>
         </TouchableOpacity>
@@ -78,3 +82,9 @@ export function Home() {
     </View>
   );
 }
+
+Home.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

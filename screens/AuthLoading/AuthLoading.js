@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { getAccessToken, onTokenChange } from '../../AuthManager';
+import { getAccessToken } from '../../auth';
 
 export function AuthLoading({ navigation }) {
   useEffect(() => {
@@ -15,17 +15,6 @@ export function AuthLoading({ navigation }) {
     };
 
     authenticate();
-
-    /*
-     * TODO
-     * Well, it seems to work, but I bet we can find
-     * a better place for this!
-     */
-    onTokenChange(newToken => {
-      if (!newToken) {
-        navigation.navigate('Auth');
-      }
-    });
   }, [navigation]);
 
   return (

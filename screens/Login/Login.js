@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useLoginMutation } from '../../AuthManager';
+import { useLoginMutation } from '../../auth';
 import styles from '../../styles/styles';
 
 import Logo from '../../assets/Logo.svg';

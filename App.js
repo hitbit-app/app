@@ -11,7 +11,7 @@ import { Login } from './screens/Login';
 import { SignUp } from './screens/SignUp';
 import { Home } from './screens/Home';
 import { AuthLoading } from './screens/AuthLoading';
-import { getAccessToken, removeAccessToken } from './AuthManager';
+import { getAccessToken, removeAccessToken } from './auth';
 import './Reactotron';
 
 const client = new ApolloClient({
