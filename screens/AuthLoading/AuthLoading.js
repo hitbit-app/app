@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { getAccessToken } from '../../auth';
+import { getAccessToken } from 'auth';
 
 export function AuthLoading({ navigation }) {
   useEffect(() => {
