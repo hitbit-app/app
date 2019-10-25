@@ -904,10 +904,10 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@hitbit/expo-svg-transformer@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@hitbit/expo-svg-transformer/-/expo-svg-transformer-0.0.3.tgz#4fc043ada49d3bb78d03c824700e8d2ee332baae"
-  integrity sha512-17hKvaW0nTBW7C50DyrzZzl/6tRlu6WsBFI9etB87XQcMecFwXR/lne0AulF4PEeI66fxGCiWsAf0mzZpq7mcg==
+"@hitbit/expo-svg-transformer@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hitbit/expo-svg-transformer/-/expo-svg-transformer-0.0.4.tgz#eb6e01d55dffd699e92786cfdfc8dca6e1353da0"
+  integrity sha512-YyFnowOxWE5XaBHA8mYsGcxN+LC4llkgf/luIR6fwD1KlH/M2fMDDlJupfFCgV0fGO1pdULPKm5nA4j04mq4JQ==
   dependencies:
     "@svgr/core" "^4.3.3"
     "@svgr/plugin-jsx" "^4.3.3"

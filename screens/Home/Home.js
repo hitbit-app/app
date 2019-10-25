@@ -46,7 +46,7 @@ export function Home({ navigation }) {
   return (
     <View style={universalStyle.container}>
       <View style={universalStyle.header}>
-        <Logo style={universalStyle.login} height={50} width={50} fill="#002F49" />
+        <Logo style={universalStyle.login} height={50} width={50} />
         <TouchableOpacity
           style={universalStyle.logOutButton}
           onPress={() => {
