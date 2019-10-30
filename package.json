@@ -27,7 +27,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@hitbit/expo-svg-transformer": "^0.0.4",
+    "@expo/webpack-config": "^0.8.1",
+    "@hitbit/expo-svg-transformer": "^0.0.7",
     "babel-preset-expo": "^7.0.0",
     "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.14.3",
