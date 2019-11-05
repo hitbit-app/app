@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
 
-import PauseIcon from '../../assets/icons/pauseIcon.svg';
-import PlayIcon from '../../assets/icons/playIcon.svg';
-import BufferingIcon from '../../assets/icons/bufferingIcon.svg';
+import PauseIcon from 'assets/icons/pauseIcon.svg';
+import PlayIcon from 'assets/icons/playIcon.svg';
+import BufferingIcon from 'assets/icons/bufferingIcon.svg';
 
-import styles from '../../styles/audioPlayerStyle';
+import styles from 'styles/audioPlayerStyle';
 
 Audio.setAudioModeAsync({
   playsInSilentModeIOS: true,

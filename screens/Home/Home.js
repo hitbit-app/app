@@ -9,12 +9,12 @@ import {
   RefreshControl,
 } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { removeAccessToken } from '../../auth';
-import AudioPlayer from '../../components/AudioPlayer/AudioPlayer';
+import { removeAccessToken } from 'auth';
+import AudioPlayer from 'components/AudioPlayer/AudioPlayer';
 
-import Logo from '../../assets/Logo.svg';
-import styles from '../../styles/homeStyle';
-import universalStyle from '../../styles/styles';
+import Logo from 'assets/Logo.svg';
+import styles from 'styles/homeStyle';
+import universalStyle from 'styles/styles';
 
 const GET_HOME_DATA = gql`
   query HomeData {
