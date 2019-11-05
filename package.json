@@ -6,6 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "eslint .",
+    "gen": "hitbit-stub",
     "eject": "expo eject"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "react-navigation": "^3.11.1"
   },
   "devDependencies": {
+    "@hitbit/stubs": "0.0.7",
     "babel-preset-expo": "^7.0.0",
     "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.14.3",
