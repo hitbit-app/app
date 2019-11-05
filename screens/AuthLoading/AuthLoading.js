@@ -1,31 +1,20 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { getToken, onTokenChange } from '../../AuthManager';
+import { getAccessToken } from '../../auth';
 
 export function AuthLoading({ navigation }) {
   useEffect(() => {
     const authenticate = async () => {
       try {
-        const userToken = await getToken();
-        navigation.navigate(userToken ? 'App' : 'Auth');
+        const accessToken = await getAccessToken();
+        navigation.navigate(accessToken ? 'App' : 'Auth');
       } catch(e) {
         navigation.navigate('Auth');
       }
     };
 
     authenticate();
-
-    /*
-     * TODO
-     * Well, it seems to work, but I bet we can find
-     * a better place for this!
-     */
-    onTokenChange(newToken => {
-      if (!newToken) {
-        navigation.navigate('Auth');
-      }
-    });
   }, [navigation]);
 
   return (

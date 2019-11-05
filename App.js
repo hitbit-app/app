@@ -11,27 +11,27 @@ import { Login } from './screens/Login';
 import { SignUp } from './screens/SignUp';
 import { Home } from './screens/Home';
 import { AuthLoading } from './screens/AuthLoading';
-import { getToken, removeToken } from './AuthManager';
+import { getAccessToken, removeAccessToken } from './auth';
 import './Reactotron';
 
 const client = new ApolloClient({
   uri: 'https://hitbit-app.herokuapp.com',
   credentials: 'include',
   request: async operation => {
-    const userToken = await getToken();
+    const accessToken = await getAccessToken();
     operation.setContext({
       headers: {
-        authorization: userToken ? `Bearer ${userToken}` : '',
+        authorization: accessToken ? `Bearer ${accessToken}` : '',
       },
     });
   },
   onError: ({ graphQLErrors }) => {
     /*
-     * When userToken is expired or not longer valid for some reason
+     * When accessToken is expired or not longer valid for some reason
      * the BE gives the 'unauthorized' message
      */
     if (graphQLErrors.some(e => e.message === 'unauthorized')) {
-      removeToken();
+      removeAccessToken();
     }
   },
 });
