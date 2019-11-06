@@ -28,6 +28,8 @@ module.exports = {
   },
 
   'rules': {
+    'prettier/prettier': off,
+
     // https://eslint.org/docs/rules/#best-practices
     'curly': [ error, 'multi-line' ],
     'eqeqeq': [ error, 'always', { 'null': 'ignore' } ],
