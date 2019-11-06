@@ -9,11 +9,7 @@ module.exports = {
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended',
-  ],
-
-  'plugins': [
-    'react',
-    'react-hooks',
+    '@react-native-community',
   ],
 
   'parserOptions': {
@@ -32,6 +28,8 @@ module.exports = {
   },
 
   'rules': {
+    'prettier/prettier': off,
+
     // https://eslint.org/docs/rules/#best-practices
     'curly': [ error, 'multi-line' ],
     'eqeqeq': [ error, 'always', { 'null': 'ignore' } ],
