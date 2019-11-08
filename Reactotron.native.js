@@ -10,3 +10,5 @@ __DEV__ && Reactotron
   .configure()
   .useReactNative()
   .connect();
+
+export default Reactotron;

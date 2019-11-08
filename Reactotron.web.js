@@ -5,3 +5,5 @@ import Reactotron from 'reactotron-react-js';
 __DEV__ && Reactotron
   .configure()
   .connect();
+
+export default Reactotron;
